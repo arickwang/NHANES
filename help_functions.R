@@ -12,7 +12,7 @@ makePretty <- function(mean,lower,upper,sig = "%.1f") {
   return(pretty)
 }
 
-tab_prevs <- function(svyobj, pivot, label = NULL, sig = "%.1f") {
+table_prevalence <- function(svyobj, pivot, label = NULL, sig = "%.1f") {
   pivot = rlang::enquo(pivot)
   
   if(is.null(label)) {label = pivot} else {label = rlang::enquo(label)}
