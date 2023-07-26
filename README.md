@@ -27,17 +27,17 @@ source('~/filepath/help_functions.R')
 
 ### Included functions:
 - ```makePretty(mean, lower, upper, sig = "%.1f")```\
-*Description:*\
+**Description:**\
 ```makePretty()``` converts three columns of data into a string formatted for use in papers and tables, i.e. ##.# (##.#, ##.#)
-*Arguments:*\
+**Arguments:**\
 ```mean```: A numeric, mean\
 ```lower```: A numeric, 95% CI lower bound\
 ```upper```: A numeric, 95% CI upper bound\
 ```sig```: Optional character vector of format strings indicating the formatting, by default is a a precision value with 1 decimal point ("%.1f")
 - ```table_prevalence(svyobj, pivot, label = NULL, sig = "%.1f")```\
-*Description:*\
+**Description:**\
 ```table_prevalence()``` is a wrapper that provides the estimated prevalences of different levels in a categorical variable, for use in classic "Table 1"\
-*Arguments:*\
+**Arguments:**\
 ```svyobj```: A survey object generated from ```as_survey_design()``` or ```svydesign()``` \
 ```pivot```: The name of the variable being pivoted around\
 ```label```: Optional name to use as the label, by default is the same variable name as pivot\
