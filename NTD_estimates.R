@@ -1,10 +1,42 @@
+makePretty <- function(mean,lower,upper,sig) {
+  lower = ifelse(lower < 0, 0, lower)
+  
+  mean_pretty = sprintf(sig, mean)
+  lower_pretty = sprintf(sig, lower)
+  upper_pretty = sprintf(sig, upper)
+  
+  pretty = paste0(mean_pretty, " (", 
+                  lower_pretty, ", ",
+                  upper_pretty, ")")
+  
+  return(pretty)
+}
+
+
+check_distrib <- function(RBC, RBC_params) {
+  mu = RBC_params[1] %>% as.numeric()
+  sig = RBC_params[2] %>% as.numeric()
+  
+  tmp = rnorm(10000, mean = mu, sd = sig)
+  
+  pcts = c(0.01, seq(0.05, 0.95, 0.05), 0.99)
+  tmp2 = quantile(tmp, pcts)
+  
+  tmp3 <- data.frame(x = exp(tmp2),
+                     y = RBC)
+  
+  ggplot(data = tmp3, aes(x = x, y = y)) +
+    geom_point() +
+    geom_abline() +
+    theme_minimal() + 
+    theme(aspect.ratio = 1)
+}
 
 RBC_molloy_convert <- function(RBC) {
   RBC = (RBC-34.2802)/0.7876
   
   return(RBC)
 }
-
 
 RBC_estimate_mean_variance <- function(RBC) {
   pcts = c(0.01, seq(0.05, 0.95, 0.05), 0.99)
@@ -19,7 +51,6 @@ RBC_estimate_mean_variance <- function(RBC) {
   
   return(output)
 }
-
 
 RBC_mean_variance_quantsOnly <- function(data, pcts, quants) {
   pcts = rlang::enquo(pcts)
@@ -37,7 +68,6 @@ RBC_mean_variance_quantsOnly <- function(data, pcts, quants) {
   
   return(output)
 }
-
 
 NTD_estimate <- function(RBC, nsamp = 10000) {
   
